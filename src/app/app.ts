@@ -5,9 +5,10 @@ import { IProduct } from './Shared/Models/iproduct';
 import { ProductForm } from './ProductForm/Componets/product-form/product-form';
 import { FocusHighlight } from './Shared/Directives/focus-highlight';
 import { ICategory } from './Shared/Models/icategory';
+import { CurrencyPipe } from '@angular/common';
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,ProductForm,FocusHighlight],
+  imports: [RouterOutlet,ProductForm,FocusHighlight,CurrencyPipe],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

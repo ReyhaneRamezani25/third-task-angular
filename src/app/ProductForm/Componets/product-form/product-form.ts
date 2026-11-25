@@ -4,6 +4,7 @@ import { noWhitespaceValidator } from '../../../Shared/Validators/custom-validat
 import { ICategory } from '../../../Shared/Models/icategory';
 import { Product } from '../../../Shared/Services/product';
 import { Auth } from '../../../Shared/Services/auth';
+
 @Component({
   selector: 'app-product-form',
   imports: [ReactiveFormsModule],
