@@ -1,0 +1,127 @@
+
+<div class="modal-overlay">
+  <div class="modal">
+
+    <div class="modal-header">
+      <h2>Add New Product</h2>
+      <button type="button" class="close-btn" (click)="closeForm()">×</button>
+    </div>
+
+    <form [formGroup]="productForm" (ngSubmit)="submitForm()">
+
+      <div class="form-group">
+        <label>Product Title</label>
+        <input
+          type="text"
+          formControlName="title"
+          placeholder="Enter product title"
+        />
+
+        @if (isFieldInvalid('title')) {
+          @if (productForm.get('title')?.hasError('required')) {
+            <small class="error">Title is required.</small>
+          }
+          @if (productForm.get('title')?.hasError('minlength')) {
+            <small class="error">Title must contain at least 3 characters.</small>
+          }
+          @if (productForm.get('title')?.hasError('maxlength')) {
+            <small class="error">Title cannot exceed 100 characters.</small>
+          }
+          @if (productForm.get('title')?.hasError('whitespace')) {
+            <small class="error">Title cannot contain only spaces.</small>
+          }
+        }
+      </div>
+
+      <div class="form-group">
+        <label>Price</label>
+        <input
+          type="number"
+          formControlName="price"
+          placeholder="Enter price"
+        />
+
+        @if (isFieldInvalid('price')) {
+          @if (productForm.get('price')?.hasError('required')) {
+            <small class="error">Price is required.</small>
+          }
+          @if (productForm.get('price')?.hasError('min')) {
+            <small class="error">Price must be greater than zero.</small>
+          }
+        }
+      </div>
+
+      <div class="form-group">
+        <label>Category</label>
+
+        <select formControlName="category">
+          <option value="" disabled>Select a category</option>
+
+          @for (category of categories; track category.slug) {
+            <option [value]="category.slug">
+              {{ category.name }}
+            </option>
+          }
+        </select>
+
+        @if (isFieldInvalid('category')) {
+          <small class="error">Category is required.</small>
+        }
+      </div>
+
+      <div class="form-group">
+        <label>Stock</label>
+        <input
+          type="number"
+          formControlName="stock"
+          placeholder="Enter stock quantity"
+        />
+
+        @if (isFieldInvalid('stock')) {
+          @if (productForm.get('stock')?.hasError('required')) {
+            <small class="error">Stock is required.</small>
+          }
+          @if (productForm.get('stock')?.hasError('min')) {
+            <small class="error">Stock cannot be negative.</small>
+          }
+        }
+      </div>
+
+      <div class="form-group">
+        <label>Description</label>
+        <textarea
+          formControlName="description"
+          placeholder="Enter product description"
+        ></textarea>
+
+        @if (isFieldInvalid('description')) {
+          @if (productForm.get('description')?.hasError('required')) {
+            <small class="error">Description is required.</small>
+          }
+          @if (productForm.get('description')?.hasError('whitespace')) {
+            <small class="error">Description cannot contain only spaces.</small>
+          }
+        }
+      </div>
+
+      <div class="form-actions">
+        <button
+          type="button"
+          class="cancel-btn"
+          (click)="closeForm()"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="submit"
+          class="submit-btn"
+          [disabled]="productForm.invalid"
+        >
+          Add Product
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>
